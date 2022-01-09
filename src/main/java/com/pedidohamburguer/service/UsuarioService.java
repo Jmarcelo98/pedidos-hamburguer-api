@@ -47,6 +47,8 @@ public class UsuarioService {
 
 				}
 			}
+			user = pesquisarPeloNome(usuario.getNome());
+			return ResponseEntity.ok().body(new UsuarioDTO(user.getId(), user.getNome(), user.getAdmin()));
 		}
 
 		adicionarUsuario(usuario);
