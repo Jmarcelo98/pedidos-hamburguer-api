@@ -1,13 +1,18 @@
 package com.pedidohamburguer.model.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Molho implements Serializable {
@@ -19,6 +24,10 @@ public class Molho implements Serializable {
 	
 	@Column(name = "MOLHO_TIPO")
 	private String nomeMolho;
+	
+	@ManyToMany
+	@JoinTable(name = "tb_molho_tipo", joinColumns = @JoinColumn(name = "molho_tipo"), inverseJoinColumns = @JoinColumn(name = "pedido_id"))
+	private Set<Pedido> pedidos = new HashSet<>();
 	
 	
 	public Molho() {
@@ -52,6 +61,9 @@ public class Molho implements Serializable {
 		this.nomeMolho = nomeMolho;
 	}
 
+	public Set<Pedido> getPedidos(){
+		return pedidos;
+	}
 
 	@Override
 	public int hashCode() {
