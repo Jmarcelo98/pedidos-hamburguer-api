@@ -20,7 +20,6 @@ public class CarneController {
 	@PostMapping
 	public void adicionarCarne(Carne carne) {
 		carneService.adicionarCarne(carne);
-
 	}
 
 	@GetMapping
