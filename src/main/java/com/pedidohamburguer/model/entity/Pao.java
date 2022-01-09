@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class Pao implements Serializable {
@@ -19,6 +20,8 @@ public class Pao implements Serializable {
 	
 	@Column(name = "TIPO_PAO")
 	private String nome;
+	
+	@Lob
 	private byte[] foto;
 	
 	public Pao() {
