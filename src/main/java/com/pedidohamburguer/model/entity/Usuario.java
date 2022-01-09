@@ -3,13 +3,14 @@ package com.pedidohamburguer.model.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Cliente implements Serializable {
+public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -17,11 +18,23 @@ public class Cliente implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@Column(unique = true)
 	private String nome;
 
-	public Cliente(Integer id, String nome) {
+	@Column(unique = false, nullable = true)
+	private String senha;
+
+	private Boolean admin;
+
+	public Usuario(Integer id, String nome, String senha, Boolean admin) {
 		this.id = id;
 		this.nome = nome;
+		this.senha = senha;
+		this.admin = admin;
+	}
+
+	public Usuario() {
+		super();
 	}
 
 	public Integer getId() {
@@ -40,6 +53,22 @@ public class Cliente implements Serializable {
 		this.nome = nome;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public Boolean getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -53,7 +82,7 @@ public class Cliente implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cliente other = (Cliente) obj;
+		Usuario other = (Usuario) obj;
 		return Objects.equals(id, other.id);
 	}
 
