@@ -19,8 +19,8 @@ public class DBService {
 
 	public void instaciarBancoDeDadosH2() {
 
-		Usuario usuario = new Usuario(null, "ADMIN", bCryptPasswordEncoder.encode("admin123"), true);
-		Usuario usuario1 = new Usuario(null, "JOAO", null, false);
+		Usuario usuario = new Usuario(null, "ADMIN", null , bCryptPasswordEncoder.encode("admin123"), true);
+		Usuario usuario1 = new Usuario(null, "JOAO", "MARCELO" , null, false);
 
 		usuarioRepository.saveAll(Arrays.asList(usuario, usuario1));
 

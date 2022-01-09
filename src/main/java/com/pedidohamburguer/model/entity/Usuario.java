@@ -18,17 +18,19 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(unique = true)
 	private String nome;
+
+	private String sobrenome;
 
 	@Column(unique = false, nullable = true)
 	private String senha;
 
 	private Boolean admin;
 
-	public Usuario(Integer id, String nome, String senha, Boolean admin) {
+	public Usuario(Integer id, String nome, String sobrenome, String senha, Boolean admin) {
 		this.id = id;
 		this.nome = nome;
+		this.sobrenome = sobrenome;
 		this.senha = senha;
 		this.admin = admin;
 	}
@@ -51,6 +53,14 @@ public class Usuario implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
 	}
 
 	public String getSenha() {
