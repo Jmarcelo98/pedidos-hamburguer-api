@@ -1,6 +1,8 @@
 package com.pedidohamburguer.model.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -9,6 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Pao implements Serializable {
@@ -20,6 +25,14 @@ public class Pao implements Serializable {
 	
 	@Column(name = "TIPO_PAO")
 	private String nome;
+	
+	
+
+	@JsonManagedReference
+	@OneToMany(mappedBy = "pao")
+	private List<Pedido> pedidos = new ArrayList<>();
+	
+
 	
 	@Lob
 	private byte[] foto;
@@ -56,6 +69,14 @@ public class Pao implements Serializable {
 
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
+	}
+	
+	public List<Pedido> getPedidos(){
+		return pedidos;
+	}
+	
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 	@Override
