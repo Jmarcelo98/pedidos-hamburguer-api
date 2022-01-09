@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pedidohamburguer.Pao;
+import com.pedidohamburguer.model.entity.Pao;
 import com.pedidohamburguer.service.PaoService;
 
 @RestController

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pedidohamburguer.Pao;
+import com.pedidohamburguer.model.entity.Pao;
 import com.pedidohamburguer.repository.PaoRepository;
 
 @Service

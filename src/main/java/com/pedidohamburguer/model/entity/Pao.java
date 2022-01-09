@@ -1,4 +1,4 @@
-package com.pedidohamburguer;
+package com.pedidohamburguer.model.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
