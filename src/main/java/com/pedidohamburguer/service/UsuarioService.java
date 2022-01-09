@@ -10,6 +10,7 @@ import com.pedidohamburguer.mensagens.MensagensPersonalizadas;
 import com.pedidohamburguer.model.dto.UsuarioDTO;
 import com.pedidohamburguer.model.entity.Usuario;
 import com.pedidohamburguer.repository.UsuarioRepository;
+import com.pedidohamburguer.util.FormatarString;
 
 @Service
 public class UsuarioService {
@@ -19,8 +20,10 @@ public class UsuarioService {
 
 	private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
+	private FormatarString fs = new FormatarString();
+
 	public ResponseEntity<Boolean> verificarAdmin(String nome) {
-		return ResponseEntity.ok().body(usuarioRepository.verificarAdmin(nome));
+		return ResponseEntity.ok().body(usuarioRepository.verificarAdmin(fs.emMaiusculo(nome)));
 	}
 
 	public ResponseEntity<?> buscarUsuario(Usuario usuario) {
