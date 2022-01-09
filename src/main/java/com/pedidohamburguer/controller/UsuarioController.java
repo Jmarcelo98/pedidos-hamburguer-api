@@ -12,7 +12,7 @@ import com.pedidohamburguer.service.UsuarioService;
 
 @RestController
 @RequestMapping("/usuario")
-@CrossOrigin
+@CrossOrigin("*")
 public class UsuarioController {
 
 	@Autowired
