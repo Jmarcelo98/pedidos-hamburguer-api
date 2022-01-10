@@ -18,25 +18,21 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 public class Pao implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(name = "TIPO_PAO")
 	private String nome;
-	
-	
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "pao")
 	private List<Pedido> pedidos = new ArrayList<>();
-	
 
-	
 	@Lob
 	private byte[] foto;
-	
+
 	public Pao() {
 	}
 
@@ -70,11 +66,11 @@ public class Pao implements Serializable {
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
-	
-	public List<Pedido> getPedidos(){
+
+	public List<Pedido> getPedidos() {
 		return pedidos;
 	}
-	
+
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
@@ -95,6 +91,5 @@ public class Pao implements Serializable {
 		Pao other = (Pao) obj;
 		return Objects.equals(id, other.id);
 	}
-	
 
 }

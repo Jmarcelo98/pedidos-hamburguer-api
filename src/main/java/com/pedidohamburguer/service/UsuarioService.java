@@ -26,7 +26,7 @@ public class UsuarioService {
 		return ResponseEntity.ok().body(usuarioRepository.verificarAdmin(fs.emMaiusculo(nome)));
 	}
 
-	public ResponseEntity<?> buscarUsuario(Usuario usuario) {
+	public ResponseEntity<?> buscarUsuarioOuAdicionar(Usuario usuario) {
 
 		usuario.setNome(usuario.getNome().toUpperCase());
 
