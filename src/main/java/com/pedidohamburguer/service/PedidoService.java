@@ -8,20 +8,21 @@ import org.springframework.stereotype.Service;
 import com.pedidohamburguer.model.entity.Pedido;
 import com.pedidohamburguer.repository.PedidoRepository;
 
-@Service	
+@Service
 public class PedidoService {
-	
+
+
 	@Autowired
 	private PedidoRepository pedidoRepository;
 	
 	
+
 	public void adicionarPedido(Pedido pedido) {
-		pedido.setUsuario(pedido.getUsuario().toUpperCase());
 		pedidoRepository.save(pedido);
 		
 	}
-	
-	public List<Pedido>buscarPedido(){
+
+	public List<Pedido> buscarPedido() {
 		return pedidoRepository.findAll();
 	}
 }
