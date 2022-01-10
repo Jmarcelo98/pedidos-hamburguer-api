@@ -24,8 +24,8 @@ public class UsuarioController {
 	}
 
 	@GetMapping
-	public ResponseEntity<?> buscarUsuario(Usuario usuario) {
-		return ResponseEntity.ok().body(usuarioService.buscarUsuario(usuario)).getBody();
+	public ResponseEntity<?> buscarUsuarioOuAdicionar(Usuario usuario) {
+		return ResponseEntity.ok().body(usuarioService.buscarUsuarioOuAdicionar(usuario)).getBody();
 	}
 
 }

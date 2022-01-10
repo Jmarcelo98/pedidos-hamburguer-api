@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.pedidohamburguer.model.entity.Carne;
 import com.pedidohamburguer.model.entity.Molho;
 import com.pedidohamburguer.model.entity.Pao;
-import com.pedidohamburguer.model.entity.Pedido;
 import com.pedidohamburguer.model.entity.Usuario;
 import com.pedidohamburguer.model.enums.CarneEnum;
 import com.pedidohamburguer.model.enums.MolhoEnum;
