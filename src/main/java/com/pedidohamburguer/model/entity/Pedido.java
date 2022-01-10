@@ -23,15 +23,19 @@ public class Pedido implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String usuario;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "id_usuario")
+	private Usuario usuario;
 
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "pao_tipo")
+	@JoinColumn(name = "id_pao")
 	private Pao pao;
 	
 	@ManyToOne
-	@JoinColumn(name = "carne_ponto")
+	@JoinColumn(name = "id_carne")
 	private Carne carne;
 	
 	@JsonIgnore
@@ -49,7 +53,7 @@ public class Pedido implements Serializable {
 	public Pedido() {
 	}
 
-	public Pedido(Integer id, String usuario, Pao pao, Carne carne, Boolean alface, Boolean tomate, Boolean bacon, Boolean cebolaCaramelizada, Boolean concluido) {
+	public Pedido(Integer id, Usuario usuario, Pao pao, Carne carne, Boolean alface, Boolean tomate, Boolean bacon, Boolean cebolaCaramelizada, Boolean concluido) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
@@ -70,11 +74,11 @@ public class Pedido implements Serializable {
 		this.id = id;
 	}
 
-	public String getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(String usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 

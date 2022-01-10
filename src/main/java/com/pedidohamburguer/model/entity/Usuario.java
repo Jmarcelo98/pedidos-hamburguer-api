@@ -1,6 +1,8 @@
 package com.pedidohamburguer.model.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario implements Serializable {
@@ -26,6 +29,11 @@ public class Usuario implements Serializable {
 	private String senha;
 
 	private Boolean admin;
+	
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Pedido> pedidos = new ArrayList<>();
+	
 
 	public Usuario(Integer id, String nome, String sobrenome, String senha, Boolean admin) {
 		this.id = id;
@@ -78,6 +86,14 @@ public class Usuario implements Serializable {
 	public void setAdmin(Boolean admin) {
 		this.admin = admin;
 	}
+	
+	public List<Pedido> getPedidos(){
+		return pedidos;
+	}
+	
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 
 	@Override
 	public int hashCode() {
@@ -95,5 +111,6 @@ public class Usuario implements Serializable {
 		Usuario other = (Usuario) obj;
 		return Objects.equals(id, other.id);
 	}
+
 
 }
