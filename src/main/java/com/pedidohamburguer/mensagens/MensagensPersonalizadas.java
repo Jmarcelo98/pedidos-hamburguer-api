@@ -6,7 +6,7 @@ public class MensagensPersonalizadas {
 	public static final String ADMIN = "ADMIN";
 
 //	SENHAS
-	public static final String SENHA_INCORRETA = "Usuário ou senha incorreto!";
+	public static final String SENHA_INCORRETA = "Usuário ou senha incorreta!";
 	public static final String SENHA_NULA = "A senha não pode ser nula!";
 
 //	ADMIN
