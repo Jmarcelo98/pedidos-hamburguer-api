@@ -57,8 +57,9 @@ public class DBService {
 		Molho molho2 = new Molho(null, MolhoEnum.BACON.getDescricao());
 
 		molhoRepository.saveAll(Arrays.asList(molho, molho1, molho2));
-		
-		//Pedido pedido = new Pedido(null, null, pao1, carne1, null, null, null, null, null);
+
+		// Pedido pedido = new Pedido(null, null, pao1, carne1, null, null, null, null,
+		// null);
 
 	}
 

@@ -12,6 +12,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
 	Usuario findByNome(String nome);
 
+	Usuario findByNomeAndSobrenome(String nome, String sobrenome);
+
 	Boolean existsByNome(String nome);
 
 	@Query(value = "SELECT obj.senha FROM Usuario obj WHERE obj.nome = ?1", nativeQuery = true)

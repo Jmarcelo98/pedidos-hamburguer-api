@@ -37,6 +37,12 @@
 			<version>2.9.2</version>
 		</dependency>
 
+		<!-- VALIDACAO -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
 
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -44,6 +50,22 @@
 			<version>2.9.2</version>
 		</dependency>
 		<!-- FIM SWAGGER -->
+
+
+		<!-- LOMBOK -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.22</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<version>2.5.2</version>
+		</dependency>
 
 		<!-- JPA -->
 		<dependency>
@@ -57,6 +79,7 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- CRIPTOGRAFIA -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>

@@ -14,25 +14,28 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 public class Molho implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(name = "MOLHO_TIPO")
 	private String nomeMolho;
-	
+
 	@ManyToMany
 	@JoinTable(name = "tb_molho_tipo", joinColumns = @JoinColumn(name = "molho_tipo"), inverseJoinColumns = @JoinColumn(name = "pedido_id"))
 	private Set<Pedido> pedidos = new HashSet<>();
-	
-	
+
 	public Molho() {
 	}
-
 
 	public Molho(Integer id, String nomeMolho) {
 		super();
@@ -40,36 +43,10 @@ public class Molho implements Serializable {
 		this.nomeMolho = nomeMolho;
 	}
 
-
-
-	public Integer getId() {
-		return id;
-	}
-
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-
-	public String getNomeMolho() {
-		return nomeMolho;
-	}
-
-
-	public void setNomeMolho(String nomeMolho) {
-		this.nomeMolho = nomeMolho;
-	}
-
-	public Set<Pedido> getPedidos(){
-		return pedidos;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -83,5 +60,4 @@ public class Molho implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 
-	
 }
