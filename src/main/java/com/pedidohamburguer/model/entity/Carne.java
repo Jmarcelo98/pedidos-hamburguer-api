@@ -12,25 +12,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
+
 public class Carne implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy =GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(unique = true, name = "PONTO_CARNE")
 	private String pontoCarne;
-	
-	
+
 	@OneToMany(mappedBy = "carne")
 	private List<Pedido> pedidos = new ArrayList<>();
-	
-	
+
 	public Carne() {
 	}
-
 
 	public Carne(Integer id, String pontoCarne) {
 		super();
@@ -38,40 +41,10 @@ public class Carne implements Serializable {
 		this.pontoCarne = pontoCarne;
 	}
 
-
-	public Integer getId() {
-		return id;
-	}
-
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-
-	public String getPontoCarne() {
-		return pontoCarne;
-	}
-
-
-	public void setPontoCarne(String pontoCarne) {
-		this.pontoCarne = pontoCarne;
-	}
-	
-	public List<Pedido> getPedidos(){
-		return pedidos;
-	}
-	
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
-
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
