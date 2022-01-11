@@ -1,12 +1,13 @@
 package com.pedidohamburguer.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.pedidohamburguer.mensagens.MensagensPersonalizadas;
+import com.pedidohamburguer.model.dto.UsuarioAdminDTO;
+import com.pedidohamburguer.model.dto.UsuarioAdminSemSenhaDTO;
 import com.pedidohamburguer.model.dto.UsuarioDTO;
 import com.pedidohamburguer.model.entity.Usuario;
 import com.pedidohamburguer.repository.UsuarioRepository;
@@ -26,57 +27,66 @@ public class UsuarioService {
 		return ResponseEntity.ok().body(usuarioRepository.verificarAdmin(fs.emMaiusculo(nome)));
 	}
 
-	public ResponseEntity<?> buscarUsuarioOuAdicionar(Usuario usuario) {
+	public ResponseEntity<?> loginUsuario(UsuarioDTO usuarioRecebido) {
 
-		usuario.setNome(usuario.getNome().toUpperCase());
+		Usuario usuario = pesquisarPeloNomeESobrenome(usuarioRecebido);
 
-		Usuario user = new Usuario();
+		if (usuario != null) {
 
-		if (usuarioRepository.existsByNome(usuario.getNome())) {
+			if (!usuario.getAdmin()) {
 
-			if (usuario.getNome().equals("ADMIN")) {
+				return ResponseEntity.ok().body(
+						new UsuarioDTO(usuario.getId(), usuario.getNome(), usuario.getSobrenome(), usuario.getAdmin()));
 
-				if (usuario.getSenha() == null) {
-					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(MensagensPersonalizadas.senhaNula);
-				}
+			} else {
 
-				if (sucessoSenha(usuario)) {
-					user = pesquisarPeloNome(usuario.getNome());
-					return ResponseEntity.ok().body(new UsuarioDTO(user.getId(), user.getNome(), user.getAdmin()));
+				return ResponseEntity.badRequest().body(MensagensPersonalizadas.USUARIO_ADMIN_ERRO);
+			}
+
+		} else {
+			Usuario novoUsuario = adicionarUsuarioNormal(usuarioRecebido);
+			return ResponseEntity.ok()
+					.body(new UsuarioDTO(novoUsuario.getId(), novoUsuario.getNome(), novoUsuario.getSobrenome(), false));
+		}
+
+	}
+
+	public ResponseEntity<?> loginAdmin(UsuarioAdminDTO usuarioRecebido) {
+
+		Usuario usuario = pesquisarPeloNome(usuarioRecebido.getNome());
+
+		if (usuario != null) {
+			if (usuario.getAdmin()) {
+
+				if (sucessoSenha(usuarioRecebido)) {
+
+					return ResponseEntity.ok()
+							.body(new UsuarioAdminSemSenhaDTO(usuario.getId(), usuario.getNome(), usuario.getAdmin()));
 
 				} else {
-
-					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(MensagensPersonalizadas.senhaIncorreta);
-
+					return ResponseEntity.badRequest().body(MensagensPersonalizadas.SENHA_INCORRETA);
 				}
+
+			} else {
+				return ResponseEntity.badRequest().body(MensagensPersonalizadas.USUARIO_NAO_ADMIN);
 			}
-			user = pesquisarPeloNome(usuario.getNome());
-			return ResponseEntity.ok().body(new UsuarioDTO(user.getId(), user.getNome(), user.getAdmin()));
+		} else {
+			return ResponseEntity.badRequest().body(MensagensPersonalizadas.USUARIO_NAO_ENCONTRADO);
 		}
 
-		adicionarUsuario(usuario);
-		user = pesquisarPeloNome(usuario.getNome());
-		return ResponseEntity.ok().body(new UsuarioDTO(user.getId(), user.getNome(), user.getAdmin()));
 	}
 
-	public void adicionarUsuario(Usuario usuarioRecebido) {
-
-		Usuario usuario = new Usuario();
-
-		if (usuarioRecebido.getNome().equals("ADMIN")) {
-			usuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
-			usuario.setAdmin(true);
-		}
-
-		usuario.setNome(usuarioRecebido.getNome().toUpperCase());
-		usuario.setAdmin(false);
-		usuarioRepository.save(usuario);
+	private Usuario adicionarUsuarioNormal(UsuarioDTO usuario) {
+		Usuario user = new Usuario(null, fs.emMaiusculo(usuario.getNome()), fs.emMaiusculo(usuario.getSobrenome()),
+				null, false);
+		usuarioRepository.save(user);
+		return user;
 	}
 
-	private boolean sucessoSenha(Usuario usuario) {
+	private boolean sucessoSenha(UsuarioAdminDTO usuario) {
 
 		if (bCryptPasswordEncoder.matches(usuario.getSenha(),
-				usuarioRepository.buscarSenhaCriptografadaUsuario(usuario.getNome()))) {
+				usuarioRepository.buscarSenhaCriptografadaUsuario(fs.emMaiusculo(usuario.getNome())))) {
 			return true;
 		}
 
@@ -85,7 +95,12 @@ public class UsuarioService {
 	}
 
 	private Usuario pesquisarPeloNome(String nome) {
-		return usuarioRepository.findByNome(nome);
+		return usuarioRepository.findByNome(fs.emMaiusculo(nome));
+	}
+
+	private Usuario pesquisarPeloNomeESobrenome(UsuarioDTO usuario) {
+		return usuarioRepository.findByNomeAndSobrenome(fs.emMaiusculo(usuario.getNome()),
+				fs.emMaiusculo(usuario.getSobrenome()));
 	}
 
 }
