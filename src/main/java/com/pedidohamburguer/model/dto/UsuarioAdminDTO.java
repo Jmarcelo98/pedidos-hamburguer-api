@@ -1,6 +1,5 @@
 package com.pedidohamburguer.model.dto;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
