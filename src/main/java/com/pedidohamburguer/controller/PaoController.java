@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.pedidohamburguer.model.entity.Pao;
+import com.pedidohamburguer.model.dto.PaoDTO;
 import com.pedidohamburguer.service.PaoService;
 
 @RestController
@@ -21,8 +21,8 @@ public class PaoController {
 	private PaoService paoService;
 
 	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public void adicionarPao(Pao pao, @RequestPart("file") MultipartFile file) {
-		paoService.adicionarPao(pao, file);
+	public void adicionarPao( PaoDTO pao, @RequestPart("file") MultipartFile file) {
+		 paoService.adicionarPao(pao, file);
 	}
 
 	@GetMapping

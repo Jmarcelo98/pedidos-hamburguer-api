@@ -1,5 +1,7 @@
 package com.pedidohamburguer.model.dto;
 
+import com.pedidohamburguer.model.entity.Carne;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +15,11 @@ public class CarneDTO {
 	public CarneDTO(Integer id, String pontoCarne) {
 		this.id = id;
 		this.pontoCarne = pontoCarne;
+	}
+
+	public CarneDTO(Carne obj) {
+		id = obj.getId();
+		pontoCarne = obj.getPontoCarne();
 	}
 
 
