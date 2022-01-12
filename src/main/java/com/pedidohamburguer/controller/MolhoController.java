@@ -4,10 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pedidohamburguer.model.entity.Molho;
+import com.pedidohamburguer.model.dto.MolhoDTO;
 import com.pedidohamburguer.service.MolhoService;
 
 @RestController
@@ -18,8 +19,8 @@ public class MolhoController {
 	private MolhoService molhoService;
 
 	@PostMapping
-	public void adicionarMolho(Molho molho) {
-		molhoService.adicionarMolho(molho);
+	public ResponseEntity<?> adicionarMolho(@RequestBody MolhoDTO molho) {
+		return molhoService.adicionarMolho(molho);
 
 	}
 
