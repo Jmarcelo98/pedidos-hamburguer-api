@@ -1,6 +1,7 @@
 package com.pedidohamburguer.model.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -12,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -51,12 +54,15 @@ public class Pedido implements Serializable {
 	private Boolean bacon;
 	private Boolean cebolaCaramelizada;
 	private Boolean concluido;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataCriacao;
 
 	public Pedido() {
 	}
 
 	public Pedido(Integer id, Usuario usuario, Pao pao, Carne carne, Boolean alface, Boolean tomate, Boolean bacon,
-			Boolean cebolaCaramelizada, Boolean concluido) {
+			Boolean cebolaCaramelizada, Date dataCriacao, Boolean concluido) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
@@ -66,6 +72,7 @@ public class Pedido implements Serializable {
 		this.tomate = tomate;
 		this.bacon = bacon;
 		this.cebolaCaramelizada = cebolaCaramelizada;
+		this.dataCriacao = dataCriacao;
 		this.concluido = concluido;
 	}
 

@@ -10,13 +10,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class MolhoDTO {
-	
+
+	private Integer id;
+	private String nomeMolho;
+
 	public MolhoDTO(Molho obj) {
 		id = obj.getId();
 		nomeMolho = obj.getNomeMolho();
 	}
-	private Integer id;
-	private String nomeMolho;
-
 
 }

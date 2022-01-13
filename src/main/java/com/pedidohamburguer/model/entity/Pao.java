@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -35,17 +34,13 @@ public class Pao implements Serializable {
 	@OneToMany(mappedBy = "pao")
 	private List<Pedido> pedidos = new ArrayList<>();
 
-	@Lob
-	private byte[] foto;
-
 	public Pao() {
 	}
 
-	public Pao(Integer id, String nome, byte[] foto) {
+	public Pao(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.foto = foto;
 	}
 
 	@Override

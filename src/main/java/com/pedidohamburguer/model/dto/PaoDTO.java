@@ -10,15 +10,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class PaoDTO {
-	
+
 	public PaoDTO(Pao obj) {
 		id = obj.getId();
 		nome = obj.getNome();
-		
+
 	}
+
 	private Integer id;
 	private String nome;
-	private byte[] foto;
-	
 
 }

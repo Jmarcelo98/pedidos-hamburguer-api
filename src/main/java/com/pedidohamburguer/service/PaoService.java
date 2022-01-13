@@ -1,12 +1,10 @@
 package com.pedidohamburguer.service;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.pedidohamburguer.model.dto.PaoDTO;
 import com.pedidohamburguer.model.entity.Pao;
@@ -21,16 +19,11 @@ public class PaoService {
 	
 	private FormatarString fs = new FormatarString()
 ;
-	public void adicionarPao(PaoDTO pao, MultipartFile file) {
+	public void adicionarPao(PaoDTO pao) {
 		
-		
-		try {
-			pao.setFoto(file.getBytes());
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (pao != null) {
+			paoRepository.save(new Pao(null, fs.emMaiusculo(pao.getNome())));	
 		}
-
-		paoRepository.save(new Pao(null, fs.emMaiusculo(pao.getNome()), pao.getFoto()));
 
 	}
 

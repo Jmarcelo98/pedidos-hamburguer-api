@@ -1,6 +1,8 @@
 package com.pedidohamburguer.service;
 
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.pedidohamburguer.model.entity.Carne;
 import com.pedidohamburguer.model.entity.Molho;
 import com.pedidohamburguer.model.entity.Pao;
+import com.pedidohamburguer.model.entity.Pedido;
 import com.pedidohamburguer.model.entity.Usuario;
 import com.pedidohamburguer.model.enums.CarneEnum;
 import com.pedidohamburguer.model.enums.MolhoEnum;
@@ -16,6 +19,7 @@ import com.pedidohamburguer.model.enums.PaoEnum;
 import com.pedidohamburguer.repository.CarneRepository;
 import com.pedidohamburguer.repository.MolhoRepository;
 import com.pedidohamburguer.repository.PaoRepository;
+import com.pedidohamburguer.repository.PedidoRepository;
 import com.pedidohamburguer.repository.UsuarioRepository;
 
 @Service
@@ -32,6 +36,9 @@ public class DBService {
 
 	@Autowired
 	private MolhoRepository molhoRepository;
+	
+	@Autowired
+	private PedidoRepository pedidoRepository;
 
 	private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
@@ -47,8 +54,8 @@ public class DBService {
 
 		carneRepository.saveAll(Arrays.asList(carne, carne1));
 
-		Pao pao = new Pao(null, PaoEnum.AUSTRALIANO.getDescricao(), null);
-		Pao pao1 = new Pao(null, PaoEnum.GERGELIM.getDescricao(), null);
+		Pao pao = new Pao(null, PaoEnum.AUSTRALIANO.getDescricao());
+		Pao pao1 = new Pao(null, PaoEnum.GERGELIM.getDescricao());
 
 		paoRepository.saveAll(Arrays.asList(pao, pao1));
 
@@ -57,9 +64,13 @@ public class DBService {
 		Molho molho2 = new Molho(null, MolhoEnum.BACON.getDescricao());
 
 		molhoRepository.saveAll(Arrays.asList(molho, molho1, molho2));
+		
+		Calendar data = Calendar.getInstance();
 
-		// Pedido pedido = new Pedido(null, null, pao1, carne1, null, null, null, null,
-		// null);
+		Pedido pedido = new Pedido(null, usuario, pao, carne, false, false, true, true, new Date(), false);
+		data.set(data.get(Calendar.YEAR), data.get(Calendar.MONTH) + 1, 11);
+		Pedido pedido1 = new Pedido(null, usuario, pao1, carne1, true, true, true, false, data.getTime(), false);
+		pedidoRepository.saveAll(Arrays.asList(pedido, pedido1));
 
 	}
 
