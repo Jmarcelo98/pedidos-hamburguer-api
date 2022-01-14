@@ -1,8 +1,8 @@
 package com.pedidohamburguer.model.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import com.pedidohamburguer.model.entity.Pedido;
 
@@ -21,7 +21,7 @@ public class PedidoDTO {
 
 	private CarneDTO carneDTO;
 
-	private Set<MolhoDTO> molhoDTO = new HashSet<>();
+	private List<MolhoDTO> molhoDTO = new ArrayList<>();
 
 	private Boolean alface;
 	private Boolean tomate;
@@ -38,7 +38,7 @@ public class PedidoDTO {
 		paoDTO = new PaoDTO(obj.getPao().getId(), obj.getPao().getNome());
 		carneDTO = new CarneDTO(obj.getCarne().getId(), obj.getCarne().getPontoCarne());
 //		arrumar o molho dps
-		molhoDTO = new HashSet(obj.getMolhos());
+//		molhoDTO = obj.getMolhos();
 		alface = obj.getAlface();
 		tomate = obj.getTomate();
 		bacon = obj.getBacon();
