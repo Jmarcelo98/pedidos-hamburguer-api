@@ -67,9 +67,9 @@ public class DBService {
 		
 		Calendar data = Calendar.getInstance();
 
-		Pedido pedido = new Pedido(null, usuario, pao, carne, false, false, true, true, new Date(), false);
+		Pedido pedido = new Pedido(null, usuario1, pao, carne, false, false, true, true, new Date(), false);
 		data.set(data.get(Calendar.YEAR), data.get(Calendar.MONTH) + 1, 11);
-		Pedido pedido1 = new Pedido(null, usuario, pao1, carne1, true, true, true, false, data.getTime(), false);
+		Pedido pedido1 = new Pedido(null, usuario1, pao1, carne1, true, true, true, false, data.getTime(), false);
 		pedidoRepository.saveAll(Arrays.asList(pedido, pedido1));
 
 	}
