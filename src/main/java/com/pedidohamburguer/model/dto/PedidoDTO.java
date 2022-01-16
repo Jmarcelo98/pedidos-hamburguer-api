@@ -32,13 +32,19 @@ public class PedidoDTO {
 	private Date dataCriacao;
 
 	public PedidoDTO(Pedido obj) {
+
+		for (int i = 0; i < obj.getMolhos().size(); i++) {
+
+			molhoDTO.add(new MolhoDTO(obj.getMolhos().get(i).getId(), obj.getMolhos().get(i).getNomeMolho()));
+
+		}
+
 		id = obj.getId();
 		usuarioDTO = new UsuarioDTO(obj.getUsuario().getId(), obj.getUsuario().getNome(),
 				obj.getUsuario().getSobrenome(), obj.getUsuario().getAdmin());
 		paoDTO = new PaoDTO(obj.getPao().getId(), obj.getPao().getNome());
 		carneDTO = new CarneDTO(obj.getCarne().getId(), obj.getCarne().getPontoCarne());
-//		arrumar o molho dps
-//		molhoDTO = obj.getMolhos();
+		// molhoDTO.addAll(obj.getMolhos());
 		alface = obj.getAlface();
 		tomate = obj.getTomate();
 		bacon = obj.getBacon();

@@ -10,6 +10,6 @@ import com.pedidohamburguer.model.entity.Pedido;
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
 	
-	List<Pedido> findByConcluidoOrderByDataCriacaoDesc(Boolean concluido);
+	List<Pedido> findByConcluidoOrderByDataCriacaoAsc(Boolean concluido);
 	
 }

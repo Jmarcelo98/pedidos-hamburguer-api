@@ -70,10 +70,13 @@ public class DBService {
 
 		List<Molho> molhosRequeridos = molhoRepository
 				.findByNomeMolhoIn(Arrays.asList(molho.getNomeMolho(), molho2.getNomeMolho()));
+		
+		List<Molho> molhosRequeridos1 = molhoRepository
+				.findByNomeMolhoIn(Arrays.asList(molho1.getNomeMolho()));
 
-		Pedido pedido = new Pedido(null, usuario1, pao, carne, false, false, true, true, new Date(), false, null);
+		Pedido pedido = new Pedido(null, usuario1, pao, carne, false, false, true, true, new Date(), false, molhosRequeridos1);
 
-		data.set(data.get(Calendar.YEAR), data.get(Calendar.MONTH) + 1, 11);
+		data.set(data.get(Calendar.YEAR), data.get(Calendar.MONTH), 11);
 
 		Pedido pedido1 = new Pedido(null, usuario1, pao1, carne1, true, true, true, false, data.getTime(), false, molhosRequeridos);
 

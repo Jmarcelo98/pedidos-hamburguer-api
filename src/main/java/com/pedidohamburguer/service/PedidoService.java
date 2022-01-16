@@ -1,6 +1,7 @@
 package com.pedidohamburguer.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,23 @@ public class PedidoService {
 		pedidoRepository.save(pedido);
 
 	}
-	
+
 	public ResponseEntity<List<PedidoDTO>> buscarPedidosEmEspera() {
-		List<Pedido> list = pedidoRepository.findByConcluidoOrderByDataCriacaoDesc(false);
-		
+
+		List<Pedido> list = pedidoRepository.findByConcluidoOrderByDataCriacaoAsc(false);
 		List<PedidoDTO> listDTO = list.stream().map(obj -> new PedidoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDTO);
 
 	}
 
-	
+	public void finalizarPedido(Integer idPedido) {
+
+		Optional<Pedido> pedidoAtt = pedidoRepository.findById(idPedido);
+		if (!pedidoAtt.isEmpty()) {
+			pedidoAtt.get().setConcluido(true);
+			pedidoRepository.save(pedidoAtt.get());
+		}
+
+	}
+
 }
