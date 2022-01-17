@@ -29,7 +29,7 @@ public class UsuarioService {
 
 	public ResponseEntity<?> loginUsuario(UsuarioDTO usuarioRecebido) {
 
-		Usuario usuario = pesquisarPeloNomeESobrenome(usuarioRecebido);
+		Usuario usuario = pesquisarPeloNomeESobrenome(usuarioRecebido.getNome(), usuarioRecebido.getSobrenome());
 
 		if (usuario != null) {
 
@@ -94,13 +94,13 @@ public class UsuarioService {
 
 	}
 
-	private Usuario pesquisarPeloNome(String nome) {
+	public Usuario pesquisarPeloNome(String nome) {
 		return usuarioRepository.findByNome(fs.emMaiusculo(nome));
 	}
 
-	private Usuario pesquisarPeloNomeESobrenome(UsuarioDTO usuario) {
-		return usuarioRepository.findByNomeAndSobrenome(fs.emMaiusculo(usuario.getNome()),
-				fs.emMaiusculo(usuario.getSobrenome()));
+	public Usuario pesquisarPeloNomeESobrenome(String nome, String sobrenome) {
+		return usuarioRepository.findByNomeAndSobrenome(fs.emMaiusculo(nome),
+				fs.emMaiusculo(sobrenome));
 	}
 
 }

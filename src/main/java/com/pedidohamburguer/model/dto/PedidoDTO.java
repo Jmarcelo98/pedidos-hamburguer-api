@@ -6,11 +6,13 @@ import java.util.List;
 
 import com.pedidohamburguer.model.entity.Pedido;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class PedidoDTO {
 
 	private Integer id;
@@ -23,6 +25,7 @@ public class PedidoDTO {
 
 	private List<MolhoDTO> molhoDTO = new ArrayList<>();
 
+	private Boolean queijo;
 	private Boolean alface;
 	private Boolean tomate;
 	private Boolean bacon;
@@ -47,6 +50,7 @@ public class PedidoDTO {
 		// molhoDTO.addAll(obj.getMolhos());
 		alface = obj.getAlface();
 		tomate = obj.getTomate();
+		queijo = obj.getQueijo();
 		bacon = obj.getBacon();
 		cebolaCaramelizada = obj.getCebolaCaramelizada();
 		concluido = obj.getConcluido();

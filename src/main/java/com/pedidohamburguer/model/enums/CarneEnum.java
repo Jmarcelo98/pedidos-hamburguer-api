@@ -2,7 +2,7 @@ package com.pedidohamburguer.model.enums;
 
 public enum CarneEnum {
 
-	AO_PONTO("AO PONTO"), BEM_PASSADA("BEM PASSADA");
+	MAL_PASSADA ("MAL PASSADA") ,AO_PONTO("AO PONTO"), BEM_PASSADA("BEM PASSADA");
 
 	private String descricao;
 

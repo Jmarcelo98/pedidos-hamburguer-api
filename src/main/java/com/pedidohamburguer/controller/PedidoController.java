@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pedidohamburguer.model.dto.PedidoDTO;
-import com.pedidohamburguer.model.entity.Pedido;
 import com.pedidohamburguer.service.PedidoService;
 
 @RestController
@@ -25,16 +24,15 @@ public class PedidoController {
 	private PedidoService pedidoService;
 
 	@PostMapping
-	public void adicionarPedido(Pedido pedido) {
-		pedidoService.adicionarPedido(pedido);
-
+	public void adicionarPedido(@RequestBody PedidoDTO pedidoDTO) {
+		pedidoService.adicionarPedido(pedidoDTO);
 	}
 
 	@GetMapping
 	public ResponseEntity<List<PedidoDTO>> buscasPedidosEmEspera() {
 		return pedidoService.buscarPedidosEmEspera();
 	}
-	
+
 	@PutMapping(path = "finalizar")
 	public void finalizarPedido(@RequestBody Integer idPedido) {
 		pedidoService.finalizarPedido(idPedido);

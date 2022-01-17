@@ -49,6 +49,7 @@ public class Pedido implements Serializable {
 	@JoinTable(name = "molho_pedido", joinColumns = @JoinColumn(name = "id_pedido"), inverseJoinColumns = @JoinColumn(name = "id_molho"))
 	private List<Molho> molhos = new ArrayList<>();
 
+	private Boolean queijo;
 	private Boolean alface;
 	private Boolean tomate;
 	private Boolean bacon;
@@ -61,7 +62,7 @@ public class Pedido implements Serializable {
 	public Pedido() {
 	}
 
-	public Pedido(Integer id, Usuario usuario, Pao pao, Carne carne, Boolean alface, Boolean tomate, Boolean bacon,
+	public Pedido(Integer id, Usuario usuario, Pao pao, Carne carne, Boolean queijo, Boolean alface, Boolean tomate, Boolean bacon,
 			Boolean cebolaCaramelizada, Date dataCriacao, Boolean concluido, List<Molho> molhos) {
 		super();
 		this.id = id;
@@ -69,6 +70,7 @@ public class Pedido implements Serializable {
 		this.pao = pao;
 		this.carne = carne;
 		this.alface = alface;
+		this.queijo = queijo;
 		this.tomate = tomate;
 		this.bacon = bacon;
 		this.cebolaCaramelizada = cebolaCaramelizada;
