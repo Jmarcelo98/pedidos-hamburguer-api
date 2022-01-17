@@ -29,7 +29,8 @@ public class UsuarioService {
 
 	public ResponseEntity<?> loginUsuario(UsuarioDTO usuarioRecebido) {
 
-		Usuario usuario = pesquisarPeloNomeESobrenome(usuarioRecebido.getNome(), usuarioRecebido.getSobrenome());
+		Usuario usuario = pesquisarPeloNomeESobrenome(fs.emMaiusculo(usuarioRecebido.getNome()),
+				fs.emMaiusculo(usuarioRecebido.getSobrenome()));
 
 		if (usuario != null) {
 
@@ -45,8 +46,8 @@ public class UsuarioService {
 
 		} else {
 			Usuario novoUsuario = adicionarUsuarioNormal(usuarioRecebido);
-			return ResponseEntity.ok()
-					.body(new UsuarioDTO(novoUsuario.getId(), novoUsuario.getNome(), novoUsuario.getSobrenome(), false));
+			return ResponseEntity.ok().body(
+					new UsuarioDTO(novoUsuario.getId(), novoUsuario.getNome(), novoUsuario.getSobrenome(), false));
 		}
 
 	}
@@ -99,8 +100,7 @@ public class UsuarioService {
 	}
 
 	public Usuario pesquisarPeloNomeESobrenome(String nome, String sobrenome) {
-		return usuarioRepository.findByNomeAndSobrenome(fs.emMaiusculo(nome),
-				fs.emMaiusculo(sobrenome));
+		return usuarioRepository.findByNomeAndSobrenome(fs.emMaiusculo(nome), fs.emMaiusculo(sobrenome));
 	}
 
 }

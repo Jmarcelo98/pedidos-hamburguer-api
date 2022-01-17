@@ -7,7 +7,7 @@ import com.pedidohamburguer.model.entity.Pao;
 
 @Repository
 public interface PaoRepository extends JpaRepository<Pao, Integer> {
-	
-	
+
+	Pao findByNome(String nome);
 
 }

@@ -31,7 +31,11 @@ public class PaoService {
 		List<Pao> paos = paoRepository.findAll();
 		List<PaoDTO> paosDTO = paos.stream().map(obj -> new PaoDTO(obj)).collect(Collectors.toList());
 		return paosDTO;
-
 	}
+	
+	public Pao buscarPaoPeloNome(String nomePao) {
+		return paoRepository.findByNome(nomePao);
+	}
+
 
 }

@@ -34,5 +34,9 @@ public class CarneService {
 		List<CarneDTO> listDTO = list.stream().map(obj -> new CarneDTO(obj)).collect(Collectors.toList());
 			return listDTO;
 	}
+	
+	public Carne buscarPeloPontoDaCarne(String pontoCarne) {
+		return carneRepository.findByPontoCarne(pontoCarne);
+	}
 
 }

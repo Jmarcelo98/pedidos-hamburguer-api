@@ -33,7 +33,7 @@ public class PedidoController {
 		return pedidoService.buscarPedidosEmEspera();
 	}
 
-	@PutMapping(path = "finalizar")
+	@PutMapping(path = "/finalizar")
 	public void finalizarPedido(@RequestBody Integer idPedido) {
 		pedidoService.finalizarPedido(idPedido);
 	}

@@ -7,8 +7,7 @@ import com.pedidohamburguer.model.entity.Carne;
 
 @Repository
 public interface CarneRepository extends JpaRepository<Carne, Integer> {
-	
-	
 
+	Carne findByPontoCarne(String pontoCarne);
 
 }

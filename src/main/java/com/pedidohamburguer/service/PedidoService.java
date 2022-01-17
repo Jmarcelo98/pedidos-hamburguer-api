@@ -19,7 +19,6 @@ import com.pedidohamburguer.model.entity.Pedido;
 import com.pedidohamburguer.model.entity.Usuario;
 import com.pedidohamburguer.repository.MolhoRepository;
 import com.pedidohamburguer.repository.PedidoRepository;
-import com.pedidohamburguer.repository.UsuarioRepository;
 
 @Service
 public class PedidoService {
@@ -29,26 +28,26 @@ public class PedidoService {
 
 	@Autowired
 	private MolhoRepository molhoRepository;
-	
-	@Autowired
-	private UsuarioRepository usuarioRepository;
 
 	@Autowired
-	private UsuarioService usuarioService;
+	private CarneService carneService;
+
+	@Autowired
+	private PaoService paoService;
 
 	public ResponseEntity<Integer> adicionarPedido(PedidoDTO pedidoDTO) {
 
-		Usuario usuarioPedido = usuarioService.pesquisarPeloNomeESobrenome(pedidoDTO.getUsuarioDTO().getNome(),
-				pedidoDTO.getUsuarioDTO().getSobrenome());
-
-		if (usuarioPedido == null) {
-			usuarioPedido.setNome(pedidoDTO.getUsuarioDTO().getNome());
-			usuarioPedido.setSobrenome(pedidoDTO.getUsuarioDTO().getSobrenome());
-			usuarioPedido.setAdmin(pedidoDTO.getUsuarioDTO().getAdmin());
-			usuarioPedido.setSenha(null);
-			usuarioPedido.setId(null);
-			usuarioRepository.save(usuarioPedido);
-		}
+//		Usuario usuarioPedido = usuarioService.pesquisarPeloNomeESobrenome(pedidoDTO.getUsuarioDTO().getNome(),
+//				pedidoDTO.getUsuarioDTO().getSobrenome());
+//
+//		if (usuarioPedido == null) {
+//			usuarioPedido.setNome(pedidoDTO.getUsuarioDTO().getNome());
+//			usuarioPedido.setSobrenome(pedidoDTO.getUsuarioDTO().getSobrenome());
+//			usuarioPedido.setAdmin(pedidoDTO.getUsuarioDTO().getAdmin());
+//			usuarioPedido.setSenha(null);
+//			usuarioPedido.setId(null);
+//			usuarioRepository.save(usuarioPedido);
+//		}
 
 		List<String> molhosSelecionados = new ArrayList<>();
 
@@ -66,11 +65,15 @@ public class PedidoService {
 			molhos = Collections.emptyList();
 		}
 
-		Pedido pedido = new Pedido(null, usuarioPedido,
-				new Pao(pedidoDTO.getPaoDTO().getId(), pedidoDTO.getPaoDTO().getNome()),
-				new Carne(pedidoDTO.getCarneDTO().getId(), pedidoDTO.getCarneDTO().getPontoCarne()),
-				pedidoDTO.getQueijo(), pedidoDTO.getAlface(), pedidoDTO.getTomate(), pedidoDTO.getBacon(),
-				pedidoDTO.getCebolaCaramelizada(), new Date(), pedidoDTO.getConcluido(), molhos);
+		Carne carneSelecionada = carneService.buscarPeloPontoDaCarne(pedidoDTO.getCarneDTO().getPontoCarne());
+
+		Pao paoSelecionado = paoService.buscarPaoPeloNome(pedidoDTO.getPaoDTO().getNome());
+
+		Pedido pedido = new Pedido(null,
+				new Usuario(pedidoDTO.getUsuarioDTO().getId(), pedidoDTO.getUsuarioDTO().getNome(),
+						pedidoDTO.getUsuarioDTO().getSobrenome(), null, false),
+				paoSelecionado, carneSelecionada, pedidoDTO.getQueijo(), pedidoDTO.getAlface(), pedidoDTO.getTomate(),
+				pedidoDTO.getBacon(), pedidoDTO.getCebolaCaramelizada(), new Date(), pedidoDTO.getConcluido(), molhos);
 
 		pedidoRepository.save(pedido);
 		return ResponseEntity.ok().body(pedido.getId());
