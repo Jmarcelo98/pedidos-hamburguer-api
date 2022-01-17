@@ -36,7 +36,7 @@ public class PedidoService {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	public void adicionarPedido(PedidoDTO pedidoDTO) {
+	public ResponseEntity<Integer> adicionarPedido(PedidoDTO pedidoDTO) {
 
 		Usuario usuarioPedido = usuarioService.pesquisarPeloNomeESobrenome(pedidoDTO.getUsuarioDTO().getNome(),
 				pedidoDTO.getUsuarioDTO().getSobrenome());
@@ -73,6 +73,7 @@ public class PedidoService {
 				pedidoDTO.getCebolaCaramelizada(), new Date(), pedidoDTO.getConcluido(), molhos);
 
 		pedidoRepository.save(pedido);
+		return ResponseEntity.ok().body(pedido.getId());
 	}
 
 	public ResponseEntity<List<PedidoDTO>> buscarPedidosEmEspera() {

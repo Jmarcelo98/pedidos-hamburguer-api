@@ -24,8 +24,8 @@ public class PedidoController {
 	private PedidoService pedidoService;
 
 	@PostMapping
-	public void adicionarPedido(@RequestBody PedidoDTO pedidoDTO) {
-		pedidoService.adicionarPedido(pedidoDTO);
+	public ResponseEntity<Integer> adicionarPedido(@RequestBody PedidoDTO pedidoDTO) {
+		return pedidoService.adicionarPedido(pedidoDTO);
 	}
 
 	@GetMapping
