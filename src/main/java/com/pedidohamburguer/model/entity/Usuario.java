@@ -2,9 +2,12 @@ package com.pedidohamburguer.model.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,6 +41,9 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy = "usuario")
 	private List<Pedido> pedidos = new ArrayList<>();
 
+	@OneToMany(mappedBy ="id.usuario", cascade = CascadeType.ALL)
+	private Set<Avaliacao> avaliacoes = new HashSet<>();
+	
 	public Usuario(Integer id, String nome, String sobrenome, String senha, Boolean admin) {
 		this.id = id;
 		this.nome = nome;
