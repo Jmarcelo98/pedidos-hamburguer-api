@@ -54,8 +54,9 @@ public class DBService {
 
 		Carne carne = new Carne(null, CarneEnum.AO_PONTO.getDescricao());
 		Carne carne1 = new Carne(null, CarneEnum.BEM_PASSADA.getDescricao());
+		Carne carne2 = new Carne(null, CarneEnum.MAL_PASSADA.getDescricao());
 
-		carneRepository.saveAll(Arrays.asList(carne, carne1));
+		carneRepository.saveAll(Arrays.asList(carne, carne1, carne2));
 
 		Pao pao = new Pao(null, PaoEnum.AUSTRALIANO.getDescricao());
 		Pao pao1 = new Pao(null, PaoEnum.GERGELIM.getDescricao());
@@ -70,15 +71,16 @@ public class DBService {
 
 		List<Molho> molhosRequeridos = molhoRepository
 				.findByNomeMolhoIn(Arrays.asList(molho.getNomeMolho(), molho2.getNomeMolho()));
-		
-		List<Molho> molhosRequeridos1 = molhoRepository
-				.findByNomeMolhoIn(Arrays.asList(molho1.getNomeMolho()));
 
-		Pedido pedido = new Pedido(null, usuario1, pao, carne, true, false, false, true, true, new Date(), false, molhosRequeridos1);
+		List<Molho> molhosRequeridos1 = molhoRepository.findByNomeMolhoIn(Arrays.asList(molho1.getNomeMolho()));
+
+		Pedido pedido = new Pedido(null, usuario1, pao, carne, true, false, false, true, true, new Date(), false,
+				molhosRequeridos1);
 
 		data.set(data.get(Calendar.YEAR), data.get(Calendar.MONTH), 11);
 
-		Pedido pedido1 = new Pedido(null, usuario1, pao1, carne1, true, true, true, true, false, data.getTime(), false, molhosRequeridos);
+		Pedido pedido1 = new Pedido(null, usuario1, pao1, carne1, true, true, true, true, false, data.getTime(), false,
+				molhosRequeridos);
 
 		pedidoRepository.saveAll(Arrays.asList(pedido, pedido1));
 

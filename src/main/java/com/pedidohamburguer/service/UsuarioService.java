@@ -54,7 +54,7 @@ public class UsuarioService {
 
 	public ResponseEntity<?> loginAdmin(UsuarioAdminDTO usuarioRecebido) {
 
-		Usuario usuario = pesquisarPeloNome(usuarioRecebido.getNome());
+		Usuario usuario = pesquisarPeloNome(fs.emMaiusculo(usuarioRecebido.getNome()));
 
 		if (usuario != null) {
 			if (usuario.getAdmin()) {

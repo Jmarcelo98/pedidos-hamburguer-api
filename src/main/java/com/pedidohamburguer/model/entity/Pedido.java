@@ -60,21 +60,15 @@ public class Pedido implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
-	
-	
-	@OneToOne(mappedBy = "pedido", cascade=CascadeType.ALL)
-	private Avaliacao avaliacao;
-	
-	
 
-	
-	
-	
+	@OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
+	private Avaliacao avaliacao;
+
 	public Pedido() {
 	}
 
-	public Pedido(Integer id, Usuario usuario, Pao pao, Carne carne, Boolean queijo, Boolean alface, Boolean tomate, Boolean bacon,
-			Boolean cebolaCaramelizada, Date dataCriacao, Boolean concluido, List<Molho> molhos) {
+	public Pedido(Integer id, Usuario usuario, Pao pao, Carne carne, Boolean queijo, Boolean alface, Boolean tomate,
+			Boolean bacon, Boolean cebolaCaramelizada, Date dataCriacao, Boolean concluido, List<Molho> molhos) {
 		super();
 		this.id = id;
 		this.usuario = usuario;

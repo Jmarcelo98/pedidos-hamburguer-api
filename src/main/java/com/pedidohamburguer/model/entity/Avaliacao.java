@@ -2,6 +2,7 @@ package com.pedidohamburguer.model.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +27,11 @@ public class Avaliacao implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@Column(nullable = false)
 	private Integer nota;
+	
+	@Column(nullable = true)
 	private String avaliacao;
 
 	@ManyToOne
@@ -39,7 +44,5 @@ public class Avaliacao implements Serializable {
 
 	public Avaliacao() {
 	}
-
-
 
 }

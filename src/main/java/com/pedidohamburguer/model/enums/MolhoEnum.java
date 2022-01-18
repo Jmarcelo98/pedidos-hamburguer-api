@@ -2,7 +2,7 @@ package com.pedidohamburguer.model.enums;
 
 public enum MolhoEnum {
 
-	PICANTE("CHIPOTLE"), MAIONESE("MAIONSE"), BACON("BACONESE");
+	PICANTE("CHIPOTLE"), MAIONESE("MAIONSE"), BACON("BACONNAISE");
 
 	private String descricao;
 

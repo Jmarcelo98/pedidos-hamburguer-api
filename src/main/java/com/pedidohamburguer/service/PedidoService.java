@@ -35,7 +35,7 @@ public class PedidoService {
 	@Autowired
 	private PaoService paoService;
 
-	public ResponseEntity<Pedido> adicionarPedido(PedidoDTO pedidoDTO) {
+	public ResponseEntity<Integer> adicionarPedido(PedidoDTO pedidoDTO) {
 
 		List<String> molhosSelecionados = new ArrayList<>();
 
@@ -64,7 +64,7 @@ public class PedidoService {
 				pedidoDTO.getBacon(), pedidoDTO.getCebolaCaramelizada(), new Date(), pedidoDTO.getConcluido(), molhos);
 
 		pedidoRepository.save(pedido);
-		return ResponseEntity.ok().body(pedido);
+		return ResponseEntity.ok().body(pedido.getId());
 	}
 
 	public ResponseEntity<List<PedidoDTO>> buscarPedidosEmEspera() {
