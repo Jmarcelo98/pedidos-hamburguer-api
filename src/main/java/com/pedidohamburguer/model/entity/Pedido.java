@@ -3,10 +3,8 @@ package com.pedidohamburguer.model.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,7 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -62,10 +60,15 @@ public class Pedido implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
+	
+	
+	@OneToOne(mappedBy = "pedido", cascade=CascadeType.ALL)
+	private Avaliacao avaliacao;
+	
+	
 
 	
-	@OneToMany(mappedBy ="id.pedido", cascade = CascadeType.ALL)
-	private Set<Avaliacao> avaliacoes = new HashSet<>();
+	
 	
 	public Pedido() {
 	}
