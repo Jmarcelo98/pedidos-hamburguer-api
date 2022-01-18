@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pedidohamburguer.model.dto.PedidoDTO;
+import com.pedidohamburguer.model.entity.Pedido;
 import com.pedidohamburguer.service.PedidoService;
 
 @RestController
@@ -24,7 +25,7 @@ public class PedidoController {
 	private PedidoService pedidoService;
 
 	@PostMapping
-	public ResponseEntity<Integer> adicionarPedido(@RequestBody PedidoDTO pedidoDTO) {
+	public ResponseEntity<Pedido> adicionarPedido(@RequestBody PedidoDTO pedidoDTO) {
 		return pedidoService.adicionarPedido(pedidoDTO);
 	}
 

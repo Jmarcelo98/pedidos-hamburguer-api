@@ -35,19 +35,7 @@ public class PedidoService {
 	@Autowired
 	private PaoService paoService;
 
-	public ResponseEntity<Integer> adicionarPedido(PedidoDTO pedidoDTO) {
-
-//		Usuario usuarioPedido = usuarioService.pesquisarPeloNomeESobrenome(pedidoDTO.getUsuarioDTO().getNome(),
-//				pedidoDTO.getUsuarioDTO().getSobrenome());
-//
-//		if (usuarioPedido == null) {
-//			usuarioPedido.setNome(pedidoDTO.getUsuarioDTO().getNome());
-//			usuarioPedido.setSobrenome(pedidoDTO.getUsuarioDTO().getSobrenome());
-//			usuarioPedido.setAdmin(pedidoDTO.getUsuarioDTO().getAdmin());
-//			usuarioPedido.setSenha(null);
-//			usuarioPedido.setId(null);
-//			usuarioRepository.save(usuarioPedido);
-//		}
+	public ResponseEntity<Pedido> adicionarPedido(PedidoDTO pedidoDTO) {
 
 		List<String> molhosSelecionados = new ArrayList<>();
 
@@ -76,7 +64,7 @@ public class PedidoService {
 				pedidoDTO.getBacon(), pedidoDTO.getCebolaCaramelizada(), new Date(), pedidoDTO.getConcluido(), molhos);
 
 		pedidoRepository.save(pedido);
-		return ResponseEntity.ok().body(pedido.getId());
+		return ResponseEntity.ok().body(pedido);
 	}
 
 	public ResponseEntity<List<PedidoDTO>> buscarPedidosEmEspera() {

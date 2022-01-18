@@ -11,7 +11,7 @@ import com.pedidohamburguer.model.dto.AvaliacaoDTO;
 import com.pedidohamburguer.service.AvaliacaoService;
 
 @RestController
-@RequestMapping("/avaliacoes")
+@RequestMapping("/avaliar")
 @CrossOrigin("*")
 public class AvaliacaoController {
 	
