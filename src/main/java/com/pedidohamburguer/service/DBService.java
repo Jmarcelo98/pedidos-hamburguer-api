@@ -38,8 +38,8 @@ public class DBService {
 	@Autowired
 	private MolhoRepository molhoRepository;
 
-	@Autowired
-	private PedidoRepository pedidoRepository;
+//	@Autowired
+//	private PedidoRepository pedidoRepository;
 
 	private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
@@ -69,20 +69,20 @@ public class DBService {
 
 		molhoRepository.saveAll(Arrays.asList(molho, molho1, molho2));
 
-		List<Molho> molhosRequeridos = molhoRepository
-				.findByNomeMolhoIn(Arrays.asList(molho.getNomeMolho(), molho2.getNomeMolho()));
+//		List<Molho> molhosRequeridos = molhoRepository
+//				.findByNomeMolhoIn(Arrays.asList(molho.getNomeMolho(), molho2.getNomeMolho()));
+//
+//		List<Molho> molhosRequeridos1 = molhoRepository.findByNomeMolhoIn(Arrays.asList(molho1.getNomeMolho()));
+//
+//		Pedido pedido = new Pedido(null, usuario1, pao, carne, true, false, false, true, true, new Date(), false,
+//				molhosRequeridos1);
+//
+//		data.set(data.get(Calendar.YEAR), data.get(Calendar.MONTH), 11);
 
-		List<Molho> molhosRequeridos1 = molhoRepository.findByNomeMolhoIn(Arrays.asList(molho1.getNomeMolho()));
-
-		Pedido pedido = new Pedido(null, usuario1, pao, carne, true, false, false, true, true, new Date(), false,
-				molhosRequeridos1);
-
-		data.set(data.get(Calendar.YEAR), data.get(Calendar.MONTH), 11);
-
-		Pedido pedido1 = new Pedido(null, usuario1, pao1, carne1, true, true, true, true, false, data.getTime(), false,
-				molhosRequeridos);
-
-		pedidoRepository.saveAll(Arrays.asList(pedido, pedido1));
+//		Pedido pedido1 = new Pedido(null, usuario1, pao1, carne1, true, true, true, true, false, data.getTime(), false,
+//				molhosRequeridos);
+//
+//		pedidoRepository.saveAll(Arrays.asList(pedido, pedido1));
 
 	}
 
